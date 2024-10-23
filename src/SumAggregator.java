@@ -12,11 +12,7 @@ public class SumAggregator implements PaymentAggregator {
 
     @Override
     public long result() {
-        var result = 0L;
-        for (Payment payment : payments) {
-            result += payment.amount();
-        }
-        return result;
+        return payments.stream().map(Payment::amount).reduce(0L, Long::sum);
     }
 
     @Override
